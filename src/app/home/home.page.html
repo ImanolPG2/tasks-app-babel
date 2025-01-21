@@ -1,0 +1,152 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <div class="header-container">
+      <div>
+        <ion-title>
+          Lista de Tareas
+        </ion-title>
+        <ion-text class="date-text">
+          {{ currentDate }}
+        </ion-text>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- Filtro de estado -->
+  <ion-item>
+    <ion-label>Filtrar por estado</ion-label>
+    <ion-select [(ngModel)]="filterState" (ionChange)="applyFilters()">
+      <ion-select-option value="all">Todas</ion-select-option>
+      <ion-select-option value="completed">Completadas</ion-select-option>
+      <ion-select-option value="pending">Pendientes</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Ordenar por fecha -->
+  <ion-item>
+    <ion-label>Ordenar por</ion-label>
+    <ion-select [(ngModel)]="sortOrder" (ionChange)="applyFilters()">
+      <ion-select-option value="asc">Fecha Ascendente</ion-select-option>
+      <ion-select-option value="desc">Fecha Descendente</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-list>
+    <ion-item *ngFor="let task of filteredTasks">
+      <div class="container">
+        <ion-label [ngClass]="{'subrayado': task.state}">
+          <h2>{{ task.title }}</h2>
+          <p>{{ task.descripcion }}</p>
+          <p>{{ task.expirationDate | date:'dd/MM/yyyy' }}</p>
+          <ion-badge [color]="task.state ? 'success' : 'warning'" class="estado-badge">
+            {{ task.state ? 'Completada' : 'Pendiente' }}
+          </ion-badge>
+        </ion-label>
+
+        <ion-buttons slot="end">
+          <ion-button color="success" (click)="navigateToDetails(task.id)">
+            <ion-icon name="eye"></ion-icon>
+            <ion-label>Ver</ion-label>
+          </ion-button>
+          <ion-button color="primary" (click)="navigateToEdit(task.id)">
+            <ion-icon name="create"></ion-icon>
+            <ion-label>Editar</ion-label>
+          </ion-button>
+          <ion-button color="danger" (click)="confirmDelete(task)">
+            <ion-icon name="trash"></ion-icon>
+            <ion-label>Eliminar</ion-label>
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="openAddTaskModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+    <!-- Modal para agregar tarea -->
+    <ion-modal [isOpen]="isAddTaskModalOpen" (ionModalDidDismiss)="closeAddTaskModal()">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Agregar Tarea</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="closeAddTaskModal()">Cerrar</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <form (ngSubmit)="addTask()" #addTaskForm="ngForm">
+            <ion-item>
+              <ion-label position="stacked">Título</ion-label>
+              <ion-input
+                [(ngModel)]="newTask.title"
+                name="title"
+                required
+                type="text"
+                minlength="5"
+                placeholder="Nombre de la tarea">
+              </ion-input>
+            </ion-item>
+            <ion-note *ngIf="addTaskForm.controls['title']?.errors?.['required'] && addTaskForm.controls['title']?.touched" color="danger">
+              El título es obligatorio.
+            </ion-note>
+            <ion-note *ngIf="addTaskForm.controls['title']?.errors?.['minlength'] && addTaskForm.controls['title']?.touched" color="danger">
+              El título debe tener al menos 5 caracteres.
+            </ion-note>
+
+            <ion-item>
+              <ion-label position="stacked">Descripción</ion-label>
+              <ion-textarea
+                [(ngModel)]="newTask.descripcion"
+                name="descripcion"
+                required
+                placeholder="Descripción">
+              </ion-textarea>
+            </ion-item>
+            <ion-note *ngIf="addTaskForm.controls['descripcion']?.errors?.['required']  && addTaskForm.controls['descripcion']?.touched" color="danger">
+              La descripción es obligatoria.
+            </ion-note>
+
+            <ion-item class="ion-item">
+              <ion-label style="text-align: left;">Fecha de vencimiento</ion-label>
+              <ion-datetime-button datetime="datetime"></ion-datetime-button>
+              <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                  <ion-datetime
+                    id="datetime"
+                    [(ngModel)]="newTask.expirationDate"
+                    name="expirationDate"
+                    [min]="minDate"
+                    presentation="date"
+                    required
+                    [showDefaultButtons]="true">
+                  </ion-datetime>
+                </ng-template>
+              </ion-modal>
+            </ion-item>
+            <ion-note *ngIf="addTaskForm.controls['expirationDate']?.errors?.['required'] && addTaskForm.controls['expirationDate']?.touched" color="danger">
+              La fecha de vencimiento es obligatoria.
+            </ion-note>
+            <ion-note *ngIf="addTaskForm.controls['expirationDate']?.errors?.['min'] && addTaskForm.controls['expirationDate']?.touched" color="danger">
+              La fecha debe ser futura.
+            </ion-note>
+
+            <ion-button expand="block" type="submit" [disabled]="!addTaskForm.valid">
+              Guardar
+            </ion-button>
+          </form>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+  <ion-text color="medium" class="ion-text-center ion-padding" *ngIf="tasks.length === 0">
+    <p>No hay tareas pendientes</p>
+  </ion-text>
+</ion-content>

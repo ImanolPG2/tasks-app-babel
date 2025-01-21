@@ -1,0 +1,198 @@
+:root {
+  --ion-background-color: #1e1e1e;
+  --ion-background-color-rgb: 30,30,30;
+  --ion-toolbar-background: #2d2d2d;
+  --ion-item-background: #2d2d2d;
+  --ion-text-color: #ffffff;
+  --ion-text-color-rgb: 255,255,255;
+  --ion-border-color: #404040;
+  --ion-color-primary: #4d84ff;
+  --ion-color-danger: #ff4d4d;
+}
+
+ion-toolbar {
+  --padding-top: 0.5rem;
+  --padding-bottom: 0.5rem;
+}
+
+ion-toolbar ion-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+ion-content {
+  --background: var(--ion-background-color);
+}
+
+ion-list {
+  background: transparent;
+  padding: 1rem;
+}
+
+ion-item {
+  --background: var(--ion-item-background);
+  --border-radius: 8px;
+  margin-bottom: 0.8rem;
+  --padding-start: 1rem;
+  --padding-end: 1rem;
+  --padding-top: 1rem;
+  --padding-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+ion-item:hover {
+  --background: #363636;
+  transition: --background 0.3s ease;
+}
+
+ion-checkbox {
+  --size: 1.2rem;
+  --checkbox-background-checked: var(--ion-color-primary);
+  --border-radius: 4px;
+  margin-right: 1rem;
+}
+
+ion-item ion-label {
+  font-size: 0.95rem;
+  margin: 0 0.5rem;
+  white-space: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  text-align: left;
+}
+
+.text {
+  text-align: left;
+}
+
+ion-item ion-label.title {
+  font-weight: 500;
+  flex: 2;
+}
+
+ion-item ion-label.description {
+  color: #b0b0b0;
+  font-size: 0.9rem;
+  flex: 3;
+}
+
+ion-item ion-label.date {
+  color: #808080;
+  font-size: 0.85rem;
+  flex: 1;
+}
+
+ion-item ion-label.completed {
+  text-decoration: line-through;
+  color: #666666;
+  font-style: italic;
+}
+
+ion-buttons {
+  display: flex;
+}
+
+ion-button {
+  --padding-start: 0.8rem;
+  --padding-end: 0.8rem;
+}
+
+ion-button[color="primary"] {
+  --color: var(--ion-color-primary);
+}
+
+ion-button[color="danger"] {
+  --color: var(--ion-color-danger);
+}
+
+ion-button ion-icon {
+  font-size: 1.2rem;
+}
+
+ion-text {
+  display: block;
+  margin-top: 3rem;
+  text-align: center;
+}
+
+ion-text p {
+  font-size: 1.1rem;
+  color: #666666;
+  font-style: italic;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subrayado {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.task-card {
+  background-color: #1e1e1e;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+
+.estado-badge {
+  text-decoration: none;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header-container ion-title {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.date-text {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--ion-text-color-step-100);
+}
+
+.header-container ion-buttons {
+  margin-left: auto;
+}
+
+ion-fab {
+  margin: 1rem;
+  z-index: 10;
+}
+
+.ion-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+
+@media (max-width: 576px) {
+  ion-item ion-label {
+    font-size: 0.9rem;
+  }
+
+  ion-item ion-label.description {
+    font-size: 0.85rem;
+  }
+
+  ion-item ion-label.date {
+    font-size: 0.8rem;
+  }
+}

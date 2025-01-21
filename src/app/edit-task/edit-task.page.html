@@ -1,0 +1,68 @@
+<!-- edit-task.page.html -->
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar Tarea</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form #taskForm="ngForm">
+    <ion-item class="ion-item">
+      <ion-label>Título</ion-label>
+      <ion-input
+        [(ngModel)]="task.title"
+        name="title"
+        required
+        type="text">
+      </ion-input>
+    </ion-item>
+
+    <ion-item class="ion-item">
+      <ion-label>Descripción</ion-label>
+      <ion-textarea
+        [(ngModel)]="task.descripcion"
+        name="descripcion"
+        required
+        rows="4">
+      </ion-textarea>
+    </ion-item>
+
+    <ion-item class="ion-item">
+      <ion-label style="text-align: left;">Fecha de vencimiento</ion-label>
+      <ion-datetime-button datetime="datetime"></ion-datetime-button>
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime
+            id="datetime"
+            [(ngModel)]="task.expirationDate"
+            name="expirationDate"
+            presentation="date"
+            [showDefaultButtons]="true">
+          </ion-datetime>
+        </ng-template>
+      </ion-modal>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Estado</ion-label>
+      <ion-checkbox
+        [(ngModel)]="task.state"
+        name="state">
+      </ion-checkbox>
+      <ion-badge
+      [color]="task.state ? 'success' : 'warning'"
+      class="estado-badge">
+      {{ task.state ? 'Completada' : 'Pendiente' }}
+    </ion-badge>
+    </ion-item>
+
+    <div class="ion-padding">
+      <ion-button expand="block" (click)="saveTask()" [disabled]="!taskForm.valid">
+        Guardar Cambios
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

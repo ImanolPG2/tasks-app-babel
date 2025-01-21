@@ -1,0 +1,11 @@
+.estado-badge {
+  margin-left: 10px;
+}
+
+.ion-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}

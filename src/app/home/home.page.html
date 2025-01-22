@@ -140,6 +140,19 @@
               La fecha debe ser futura.
             </ion-note>
 
+            <ion-item>
+              <ion-label>Estado</ion-label>
+              <ion-checkbox
+                [(ngModel)]="newTask.state"
+                name="state">
+              </ion-checkbox>
+              <ion-badge
+              [color]="newTask.state ? 'success' : 'warning'"
+              class="estado-badge">
+              {{ newTask.state ? 'Completada' : 'Pendiente' }}
+            </ion-badge>
+            </ion-item>
+
             <ion-button expand="block" type="submit" [disabled]="!addTaskForm.valid">
               Guardar
             </ion-button>

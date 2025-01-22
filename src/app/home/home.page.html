@@ -14,28 +14,30 @@
 </ion-header>
 
 <ion-content>
+  <div class="filters-container">
+     <!-- Filtro de estado -->
+    <ion-item class="item-filters-state">
+      <ion-label>Filtrar por estado</ion-label>
+      <ion-select [(ngModel)]="filterState" (ionChange)="applyFilters()">
+        <ion-select-option value="all">Todas</ion-select-option>
+        <ion-select-option value="completed">Completadas</ion-select-option>
+        <ion-select-option value="pending">Pendientes</ion-select-option>
+      </ion-select>
+    </ion-item>
 
-  <!-- Filtro de estado -->
-  <ion-item>
-    <ion-label>Filtrar por estado</ion-label>
-    <ion-select [(ngModel)]="filterState" (ionChange)="applyFilters()">
-      <ion-select-option value="all">Todas</ion-select-option>
-      <ion-select-option value="completed">Completadas</ion-select-option>
-      <ion-select-option value="pending">Pendientes</ion-select-option>
-    </ion-select>
-  </ion-item>
+    <!-- Ordenar por fecha -->
+    <ion-item class="item-filters-date">
+      <ion-label>Ordenar por</ion-label>
+      <ion-select [(ngModel)]="sortOrder" (ionChange)="applyFilters()">
+        <ion-select-option value="asc">Fecha Ascendente</ion-select-option>
+        <ion-select-option value="desc">Fecha Descendente</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
 
-  <!-- Ordenar por fecha -->
-  <ion-item>
-    <ion-label>Ordenar por</ion-label>
-    <ion-select [(ngModel)]="sortOrder" (ionChange)="applyFilters()">
-      <ion-select-option value="asc">Fecha Ascendente</ion-select-option>
-      <ion-select-option value="desc">Fecha Descendente</ion-select-option>
-    </ion-select>
-  </ion-item>
 
   <ion-list>
-    <ion-item *ngFor="let task of filteredTasks">
+    <ion-item class="item-card" *ngFor="let task of filteredTasks">
       <div class="container">
         <ion-label [ngClass]="{'subrayado': task.state}">
           <h2>{{ task.title }}</h2>

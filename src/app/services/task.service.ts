@@ -65,12 +65,12 @@ export class TaskService {
       this.tasks[index] = updatedTask;
     }
     this.tasksSubject.next(this.tasks);
+    return { mensaje: 'Se elimino la tarea correctamente', state: 200 };
   }
 
   deleteTask(task: Task) {
     this.tasks = this.tasks.filter(t => t.id !== task.id);
     this.tasksSubject.next(this.tasks);
-    console.log(this.tasks);
     return { mensaje: 'Se elimino la tarea correctamente', state: 200 };
   }
 }

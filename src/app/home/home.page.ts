@@ -1,10 +1,9 @@
 // home.page.ts
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AlertController, ToastController} from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TaskService } from '../services/task.service';
 import { Task } from '../interface/task.interface';
-import { state } from '@angular/animations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
@@ -53,11 +52,11 @@ export class HomePage {
   }
 
   openAddTaskModal() {
-    this.isAddTaskModalOpen = true; // Abre el modal
+    this.isAddTaskModalOpen = true;
   }
 
   closeAddTaskModal() {
-    this.isAddTaskModalOpen = false; // Cierra el modal
+    this.isAddTaskModalOpen = false;
   }
 
   resetNewTask() {
@@ -82,14 +81,12 @@ export class HomePage {
   applyFilters() {
     let tasks = [...this.tasks];
 
-    // Filtrar por estado
     if (this.filterState === 'completed') {
       tasks = tasks.filter((task) => task.state);
     } else if (this.filterState === 'pending') {
       tasks = tasks.filter((task) => !task.state);
     }
 
-    // Ordenar por fecha
     tasks.sort((a, b) => {
       const dateA = new Date(a.expirationDate).getTime();
       const dateB = new Date(b.expirationDate).getTime();

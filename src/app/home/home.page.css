@@ -196,3 +196,44 @@ ion-fab {
     font-size: 0.8rem;
   }
 }
+
+@media only screen and (min-device-width: 305px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) {
+  .date-text {
+    display: none;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .filters-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .item-filters-state {
+    width: 35%;
+  }
+
+  .item-filters-date {
+    width: 35%;
+  }
+
+  ion-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .container {
+    width: auto;
+    display: flex;
+    flex-wrap: wrap
+  }
+
+  .item-card {
+    width: auto;
+    margin: 10px;
+  }
+}

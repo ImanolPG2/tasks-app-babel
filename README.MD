@@ -45,8 +45,36 @@ cd tasks-app-babel
 npm install
 ```
 
+## Ejecución android
+Necesitas tener android studio en tu pc configurado
 
-## Ejecución
+### Android studio
+```bash
+npm install -g @ionic/cli native-run cordova-res
+```
+```bash
+ionic capacitor add android
+```
+```bash
+npx cap open android
+```
+
+## Ejecución IOS
+
+### Xcode
+Necesitas tener Xcode en tu pc configurado
+```bash
+npm install -g @ionic/cli native-run cordova-res
+```
+```bash
+ionic capacitor add ois
+```
+```bash
+npx cap run ios
+```
+
+
+## Ejecución web
 
 ### Desarrollo local
 ```bash
@@ -106,4 +134,3 @@ proyecto/
 ```
 
 ## Autores
-- **Imanol Perez Guzman** - [ImanolPG2](https://github.com/ImanolPG2)
